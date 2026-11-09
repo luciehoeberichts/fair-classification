@@ -1,10 +1,9 @@
-import os,sys
+import os, sys
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../../fair_classification")))
 import numpy as np
 from prepare_adult_data import *
-sys.path.insert(0, '../../fair_classification/') # the code for fair classification is in this directory
 import utils as ut
-import loss_funcs as lf # loss funcs that can be optimized subject to various constraints
-
+import loss_funcs as lf
 
 
 def test_adult_data():
@@ -45,8 +44,8 @@ def test_adult_data():
 
 
 	""" Classify the data while optimizing for accuracy """
-	print
-	print "== Unconstrained (original) classifier =="
+	print()
+	print("== Unconstrained (original) classifier ==")
 	# all constraint flags are set to 0 since we want to train an unconstrained (original) classifier
 	apply_fairness_constraints = 0
 	apply_accuracy_constraint = 0
@@ -58,8 +57,8 @@ def test_adult_data():
 	apply_accuracy_constraint = 0
 	sep_constraint = 0
 	sensitive_attrs_to_cov_thresh = {"sex":0}
-	print
-	print "== Classifier with fairness constraint =="
+	print()
+	print("== Classifier with fairness constraint ==")
 	w_f_cons, p_f_cons, acc_f_cons  = train_test_classifier()
 
 	
@@ -69,7 +68,7 @@ def test_adult_data():
 	apply_accuracy_constraint = 1 # now, we want to optimize fairness subject to accuracy constraints
 	sep_constraint = 0
 	gamma = 0.5 # gamma controls how much loss in accuracy we are willing to incur to achieve fairness -- increase gamme to allow more loss in accuracy
-	print "== Classifier with accuracy constraint =="
+	print("== Classifier with accuracy constraint ==")
 	w_a_cons, p_a_cons, acc_a_cons = train_test_classifier()	
 
 	""" 
@@ -81,7 +80,7 @@ def test_adult_data():
 	apply_accuracy_constraint = 1 # now, we want to optimize accuracy subject to fairness constraints
 	sep_constraint = 1 # set the separate constraint flag to one, since in addition to accuracy constrains, we also want no misclassifications for certain points (details in demo README.md)
 	gamma = 1000.0
-	print "== Classifier with accuracy constraint (no +ve misclassification) =="
+	print("== Classifier with accuracy constraint (no +ve misclassification) ==")
 	w_a_cons_fine, p_a_cons_fine, acc_a_cons_fine  = train_test_classifier()
 
 	return
