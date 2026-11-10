@@ -1,3 +1,6 @@
+Lucie Hoeberichts: 
+This is a fork of mbilalzafar/fair-classification, the authors' code for Fairness Constraints: Mechanisms for Fair Classification. I use the disparate-impact code (fair_classification/ and disparate_impact/) and evaluate it on three datasets. The original Readme is below
+
 # Fairness in Classification
 
  
